@@ -134,8 +134,37 @@
             <td>{{ announce.title }}</td>
             <td>{{ announce.created_time }}</td>
             <td>{{ announce.last_modified }}</td>
-            <td>{{ announce.visible }}</td>
-            <td>{{ announce.important }}</td>
+            <td>
+              <div style="display: inline-block">
+                <input
+                  type="checkbox"
+                  v-model="announce.visible"
+                  @change="
+                    changeSwitch(
+                      announce.id,
+                      announce.visible,
+                      announce.important
+                    )
+                  "
+                />
+              </div>
+            </td>
+            <td>
+              <div style="display: inline-block">
+                <input
+                  type="checkbox"
+                  v-model="announce.important"
+                  @change="
+                    changeSwitch(
+                      announce.id,
+                      announce.visible,
+                      announce.important
+                    )
+                  "
+                />
+              </div>
+            </td>
+
             <td>
               <button
                 class="edit-btn"
@@ -166,7 +195,7 @@
 import api from "@/api/index.js";
 import Pagination from "@/components/Pagination.vue";
 import { formatTime } from "@/utils/time.js";
-const Swal = require("sweetalert2");
+// const Swal = require("sweetalert2");
 
 export default {
   name: "AdminAnnouncement",
@@ -222,7 +251,17 @@ export default {
     /* 공지사항 작성 후 제출 */
     async submitAnnouncement() {},
     /* 공지사항 공개, 중요 여부 설정 */
-    async changeSwitch(announcementID, visible, important) {},
+    async changeSwitch(announcementID, visible, important) {
+      try {
+        const data = {
+          visible: visible,
+          important: important,
+        };
+        await api.changeAnnouncementSwitch(announcementID, data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   watch: {
     keyword() {

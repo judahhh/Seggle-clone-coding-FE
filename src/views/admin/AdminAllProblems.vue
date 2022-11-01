@@ -53,7 +53,7 @@
 import api from "@/api/index.js";
 import Pagination from "../../components/Pagination.vue";
 // import { formatTime } from "@/utils/time.js";
-const Swal = require("sweetalert2");
+// const Swal = require("sweetalert2");
 
 export default {
   components: { Pagination },

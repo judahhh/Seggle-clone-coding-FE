@@ -114,9 +114,8 @@ export default {
     async downloadDataFile() {
       const response = await api.downloadDataFile(this.problemID);
 
-      const filename = response.headers["content-disposition"].split(
-        "filename*=UTF-8''"
-      )[1];
+      const filename =
+        response.headers["content-disposition"].split("filename*=UTF-8''")[1];
       const url = window.URL.createObjectURL(
         new Blob([response.data], {
           type: "application/zip",

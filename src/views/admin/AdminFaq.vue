@@ -131,7 +131,7 @@
 <script>
 import api from "@/api/index.js";
 import { formatTime } from "@/utils/time.js";
-const Swal = require("sweetalert2");
+// const Swal = require("sweetalert2");
 
 export default {
   name: "AdminFAQ",
