@@ -105,7 +105,17 @@
             <td>{{ faq.question }}</td>
             <td>{{ faq.created_time }}</td>
             <td>{{ faq.last_modified }}</td>
-            <td>{{ faq.visible }}</td>
+            <td>
+              <div style="display: inline-block">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="flexSwitchCheckChecked"
+                  v-model="faq.visible"
+                  @change="changeSwitch(faq.id)"
+                />
+              </div>
+            </td>
             <td scope="row">
               <button
                 class="edit-btn"
@@ -179,7 +189,13 @@ export default {
     /* FAQ 작성 후 제출 */
     async submitFaq() {},
     /* FAQ 공개 여부 설정 */
-    async changeSwitch(faqID) {},
+    async changeSwitch(faqID) {
+      try {
+        await api.changeFAQSwitch(faqID);
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>
